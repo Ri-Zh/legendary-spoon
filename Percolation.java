@@ -19,7 +19,7 @@ public class Percolation {
         {
             perc = new boolean[n][n];
             unf = new WeightedQuickUnionUF(n*n +2);
-            unf2 = new WeightedQuickUnionUF(n*n +1);
+            unf2 = new WeightedQuickUnionUF(n*n +1); // unf to counter backflow does not need virtual bottom node, but needs virtual top node.
         }
     }
 
@@ -45,7 +45,7 @@ public class Percolation {
                 unf.union(cd(row, col), cd(row+1, col));
                 unf2.union(cd(row, col), cd(row+1, col));
             }
-            if (col > 1 && isOpen(row, col-1))
+            if (col > 1 && isOpen(row, col-1)) // cannot(!!!) union with a node that isn't open! creates opening errors.
             {
                 unf.union(cd(row, col), cd(row, col - 1));
                 unf2.union(cd(row, col), cd(row, col - 1));
@@ -85,7 +85,7 @@ public class Percolation {
         return unf.find(0) == unf.find(n*n +1);
     }
 
-    private int cd(int row, int col)
+    private int cd(int row, int col) // DOUBLE CHECK CORRECT CONVERSION caused a bunch of errors because conversion was not accurate...
     {
         int ind = (n*(row-1));
         ind += col;
