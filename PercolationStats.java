@@ -5,7 +5,7 @@ public class PercolationStats {
     // perform independent trials on an n-by-n grid
     public PercolationStats(int n, int trials)
     {
-        if (n < 1 || trials < 1)
+        if (n < 1 || trials < 1) // need to check for bounds on this too
         {
             throw new IllegalArgumentException();
         }
@@ -25,7 +25,7 @@ public class PercolationStats {
     // sample mean of percolation threshold
     public double mean()
     {
-        return StdStats.mean(percvals);
+        return StdStats.mean(percvals); //function? doesnt need to code math?
     }
 
     // sample standard deviation of percolation threshold
@@ -37,7 +37,7 @@ public class PercolationStats {
     // low endpoint of 95% confidence interval
     public double confidenceLo()
     {
-        return mean() - ((1.96*stddev()/(Math.sqrt(timesran))));
+        return mean() - ((1.96*stddev()/(Math.sqrt(timesran)))); // unnessesary to create variables to hold mean and stddev, easier to call directly, saves memory
     }
 
     // high endpoint of 95% confidence interval
